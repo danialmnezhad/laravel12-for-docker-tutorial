@@ -15,6 +15,9 @@ class ImageController extends Controller
       $data = auth()->user()->images()->paginate(30);
       return view('my-images', compact('data')); 
     }
+    public function update_image(){
+      
+    }
     public function upload_image(ImageUploadRequest $req){
       $file = $req->file('file');
       $file_path = Storage::disk('public')->putFile(Image::get_images_dirname(), $file);

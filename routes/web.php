@@ -11,3 +11,4 @@ Route::post('upload', [ImageController::class, 'upload_image'])->name('upload')-
 Route::get('my-images', [ImageController::class, 'show_my_images'])->name('my-images')
  ->middleware('auth');
 Route::get('', [ImageController::class, 'show_images'])->name('home');
+Route::put('images/{id}', [ImageController::class, 'update_image'])->name('image-update');

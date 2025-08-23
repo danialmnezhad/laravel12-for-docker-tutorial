@@ -32,4 +32,7 @@ class Image extends Model
         'is_scaled_down'=>1,
      ]);
     }
+    public function getUpdateUrlAttribute(){
+        return route('image-update', ['id'=>$this->getKey()]);
+    }
 }
