@@ -36,6 +36,9 @@
              <x-image.list-image :image='$image'/>
             @endforeach
         </div>
+         <div class='my-3'>
+            {{$data->links()}}
+         </div>
          @else
           <div class="text-white bg-yellow-500 p-2 rounded">
             You have not uploaded any image

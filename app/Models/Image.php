@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Storage;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
+use App\Models\User;
 
 class Image extends Model
 {
@@ -28,11 +29,16 @@ class Image extends Model
      $image = $image_manager->read($this->fullpath);
      $image = $image->scaleDown(width: $width, height: $height);
      Storage::disk('public')->put($this->path, (string)$image->encode());
-     return $this->update([
-        'is_scaled_down'=>1,
-     ]);
+     return $this;
     }
     public function getUpdateUrlAttribute(){
-        return route('image-update', ['id'=>$this->getKey()]);
+        return route('image-update', ['image'=>$this->getKey()]);
+    }
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+    public static function delete_image(Image $image){
+        unlink($image->fullpath);
+        return $image->delete();
     }
 }
